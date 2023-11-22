@@ -7,7 +7,7 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     // more actions to be included
-    playerPos.setObjPos(5,5,'*'); //initalze position -> may need to change to take into account board size  
+    playerPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,mainGameMechsRef->getBoardSizeY()/2,'@'); //initalze position -> may need to change to take into account board size  
 }
 
 
@@ -17,7 +17,7 @@ Player::~Player()
     //we can leave it empty for now since no new keyword 
 }
 
-void Player::getPlayerPos(objPos &returnPos)
+void Player::getPlayerPos(objPos &returnPos) //getPlayerPos(postion1)   
 {
     returnPos.setObjPos(playerPos.x,playerPos.y,playerPos.symbol);
     // return the reference to the playerPos arrray list
@@ -30,7 +30,9 @@ void Player::updatePlayerDir()
     //where do i get the input -- how do i check for input 
     //not macui get char
 
-    switch(mainGameMechsRef->getInput())     
+    char input = mainGameMechsRef->getInput()
+
+    switch(input)     
     {
         case 'w':
             if(myDir != UP && myDir != DOWN) //if the direction in going isnt UP or Down then you are able to go UP
@@ -59,7 +61,9 @@ void Player::updatePlayerDir()
 
         default:
             break;
-    }      
+    }     
+
+    mainGameMechsRef->clearInput(); 
 }
 
 void Player::movePlayer()
@@ -85,15 +89,23 @@ void Player::movePlayer()
                 break;
         }
 
-    //need wrap around 
-    if (playerPos.x == mainGameMechsRef->getBoardSizeX)
-    {
-        playerPos.x = (playerPos % (mainGameMechsRef->getBoardSizeX) -2 ) + 1;
-    }
-    if (playerPos.y == mainGameMechsRef->getBoardSizeY)
-    {
-        playerPos.y = (playerPos % (mainGameMechsRef->getBoardSizeY) - 2) + 1;
-    }
+    int boardSizeX = mainGameMechsRef->getBoardSizeX();
+    int boardSizeY = mainGameMechsRef->getBoardSizeY();
+
+    int widthX = boardSizeX - 2;
+    int widthY = boardSizeY - 2;
+
+    // Wrap around on the X-axis using the modulus operator
+    playerPos.x = (((playerPos.x - 1) + widthX) % widthX) + 1; //(1-28)
+
+    // Wrap around on the Y-axis using the modulus operator
+    playerPos.y = (((playerPos.x - 1) + widthY) % widthY) + 1; //(1-13)
+
+
+  //(1-28) -> when you use a modlous you are ranging it from 0 to the mod minus 1 
+        //example % 20 will be (0-19)
+        //so then if you want to increase the 
+
 
 }
 
