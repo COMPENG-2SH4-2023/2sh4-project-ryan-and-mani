@@ -15,13 +15,18 @@ Food::Food(int initX, int initY, char initS){  //Constructor 2
 
 Food:generateFood(objPos blockOff){
 
+    int Rx;
+    int Ry; 
     int BitVecX[GameMechs.getBoardSizeX-2] = {0}; //for food position x
     int BitVecY[GameMechs.getBoardSizeY-2] = {0}; //for food position y 
     //int BitVecR[94] = {0}; //for random character symbol between 33-126
 
     srand(time(NULL));
 
-    
+    Rx = (rand() % GameMechs.getBoardSizeX-2)+1;
+    Ry = (rand() % GameMechs.getBoardSizeY-2)+1;
+
+    if (Rx != blockOff.x && Ry != blockOff.y)
 
 
 

@@ -19,7 +19,7 @@ class Food{
 
     public:
         Food(); 
-        void generateFood(objPos blockOff);
+        void generateFood(objPos blockOff); //input playerPos 
         void getFoodPos(objPos &returnPos);
 
 

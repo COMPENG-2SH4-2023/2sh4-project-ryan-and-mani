@@ -63,7 +63,7 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-
+    myPlayer->updatePlayerDir();
 }
 
 void DrawScreen(void)
@@ -79,14 +79,14 @@ void DrawScreen(void)
 
    int i,j;
 
-   for (i = 0; i <= myGM->getBoardSizeY-1; i++){
-        for (j = 0; j <= myGM->getBoardSizeX-1; j++){
+   for (i = 0; i <= myGM->getBoardSizeY()-1; i++){
+        for (j = 0; j <= myGM->getBoardSizeX()-1; j++){
             //Frame 
-            if (i == 0 || i == myGM->getBoardSizeY-1 || j == 0 || j == myGM->getBoardSizeX-1){
+            if (i == 0 || i == myGM->getBoardSizeY()-1 || j == 0 || j == myGM->getBoardSizeX()-1){ //for placing down the border
                 MacUILib_printf("#");
             }
-            else if((i == myObjPos.y) && (j == myObjPos.x)){ //Ryan 
-                MacUILib_printf("%c", myObjPos.symbol);//Ryan 
+            else if((i == tempPos.y) && (j == tempPos.x)){ //for placing down the player 
+                MacUILib_printf("%c", tempPos.symbol); 
             }
             else {
                 MacUILib_printf(" ");
@@ -97,7 +97,8 @@ void DrawScreen(void)
         } 
 
         //MacUILib_printf("The direction of movmeent: %s", playerPos.myDir);
-   
+
+  
 }
 
 void LoopDelay(void)

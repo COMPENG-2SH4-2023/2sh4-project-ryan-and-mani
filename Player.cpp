@@ -30,7 +30,7 @@ void Player::updatePlayerDir()
     //where do i get the input -- how do i check for input 
     //not macui get char
 
-    char input = mainGameMechsRef->getInput()
+    char input = mainGameMechsRef->getInput();
 
     switch(input)     
     {
