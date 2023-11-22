@@ -8,6 +8,8 @@ using namespace std;
 
 #define DELAY_CONST 100000
 
+//objPos myPos;
+
 GameMechs* myGM;
 Player* myPlayer; 
 
@@ -44,6 +46,9 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
+
+    //myPos.setObjPos(2,3,'@')
+
 
     myGM = new GameMechs(26,13);
     myPlayer = new Player(myGM);
@@ -90,6 +95,8 @@ void DrawScreen(void)
                   MacUILib_printf("\n");
  
         } 
+
+        //MacUILib_printf("The direction of movmeent: %s", playerPos.myDir);
    
 }
 

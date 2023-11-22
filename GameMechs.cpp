@@ -32,7 +32,7 @@ bool GameMechs::getExitFlagStatus()
 }
 
 bool GameMechs::getLoseFlagStatus(){
-    return loseflag; 
+    //return loseflag; 
 }
 void GameMechs::setLoseFlag(){
      loseflag = 1; 
@@ -90,5 +90,5 @@ void GameMechs::incrementScore(int incVal){
 
 
  ~GameMechs::GameMechs(){ //DESTRUCTOR 
-    delete myGM; 
+    //delete myGM; 
         }
