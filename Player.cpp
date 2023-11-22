@@ -31,9 +31,13 @@ void Player::updatePlayerDir()
     //not macui get char
 
     char input = mainGameMechsRef->getInput();
-
+    
+    //may need if input!=0 
     switch(input)     
     {
+        case ' ':
+            mainGameMechsRef->setExitTrue();
+            break;
         case 'w':
             if(myDir != UP && myDir != DOWN) //if the direction in going isnt UP or Down then you are able to go UP
             {
@@ -99,7 +103,7 @@ void Player::movePlayer()
     playerPos.x = (((playerPos.x - 1) + widthX) % widthX) + 1; //(1-28)
 
     // Wrap around on the Y-axis using the modulus operator
-    playerPos.y = (((playerPos.x - 1) + widthY) % widthY) + 1; //(1-13)
+    playerPos.y = (((playerPos.y - 1) + widthY) % widthY) + 1; //(1-13)
 
 
   //(1-28) -> when you use a modlous you are ranging it from 0 to the mod minus 1 

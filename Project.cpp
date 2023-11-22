@@ -64,6 +64,7 @@ void GetInput(void)
 void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
+    myPlayer->movePlayer();
 }
 
 void DrawScreen(void)
@@ -72,7 +73,7 @@ void DrawScreen(void)
     objPos tempPos;  
     myPlayer->getPlayerPos(tempPos);
 
-    MacUILib_printf("BoardSize: %d%d, Player Pos: <%d %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y,tempPos.symbol);
+    MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y,tempPos.symbol);
 
 
 
