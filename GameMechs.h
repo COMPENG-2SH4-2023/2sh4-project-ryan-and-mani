@@ -23,7 +23,7 @@ class GameMechs
         bool exitFlag;
         int score; 
         bool loseflag; 
-        
+
         int boardSizeX;
         int boardSizeY;
 
@@ -46,7 +46,7 @@ class GameMechs
         int getScore();
         void incrementScore(int incVal);
 
-
+ 
         ~GameMechs();
 
 

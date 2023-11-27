@@ -1,37 +1,37 @@
 #include "Food.h"
 #include "MacUILib.h"
-#include "GameMechs.h"
+#include <cstdlib>
+#include <time.h>
 
-
-Food::Food(){  //Default constructor 
-    foodPos.objPos(5,5,'m'); 
-
+Food::Food(GameMechs* mainGameMechsRef_){  //Default constructor 
+    foodPos.setObjPos(-1,-1,'j'); 
+    mainGameMechsRef = mainGameMechsRef_;
 }
 
-Food::Food(int initX, int initY, char initS){  //Constructor 2
-    foodPos.objPos(initX,initY,initS); 
 
-}
-
-Food:generateFood(objPos blockOff){
+void Food::generateFood(objPos blockOff){
 
     int Rx;
     int Ry; 
-    int BitVecX[GameMechs.getBoardSizeX-2] = {0}; //for food position x
-    int BitVecY[GameMechs.getBoardSizeY-2] = {0}; //for food position y 
-    //int BitVecR[94] = {0}; //for random character symbol between 33-126
+
 
     srand(time(NULL));
 
-    Rx = (rand() % GameMechs.getBoardSizeX-2)+1;
-    Ry = (rand() % GameMechs.getBoardSizeY-2)+1;
+ 
+    
+    do {
+        Rx = (rand() % (mainGameMechsRef->getBoardSizeX() - 2)) + 1;
+        Ry = (rand() % (mainGameMechsRef->getBoardSizeY() - 2)) + 1;
+    } while (Rx == blockOff.x && Ry == blockOff.y);
 
-    if (Rx != blockOff.x && Ry != blockOff.y)
+    foodPos.x = Rx;
+    foodPos.y = Ry;
+}
 
 
+void Food::getFoodPos(objPos &returnPos){
 
-
-
+   returnPos = foodPos; 
 }
 
 

@@ -3,6 +3,8 @@
 #include "objPos.h"
 #include "GameMechs.h"
 #include "Player.h"
+#include "Food.h"
+
 
 using namespace std;
 
@@ -12,6 +14,7 @@ using namespace std;
 
 GameMechs* myGM;
 Player* myPlayer; 
+Food* myFood; 
 
 void Initialize(void);
 void GetInput(void);
@@ -52,19 +55,28 @@ void Initialize(void)
 
     myGM = new GameMechs(26,13);
     myPlayer = new Player(myGM);
+    objPos myPlayerO;
+    myPlayer->getPlayerPos(myPlayerO);
+
+    myFood = new Food(myGM);
+    myFood->generateFood(myPlayerO);
 
 }
 
 void GetInput(void)
 {
 
-   
+   //preformed in the the player class updatePlayerDir
 }
 
 void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
+    
+    //Should clear input be here instead ???
+
+  
 }
 
 void DrawScreen(void)
@@ -75,7 +87,8 @@ void DrawScreen(void)
 
     MacUILib_printf("BoardSize: %dx%d, Player Pos: <%d %d> + %c\n", myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y,tempPos.symbol);
 
-
+    objPos foodPos;
+    myFood->getFoodPos(foodPos);
 
 
    int i,j;
@@ -88,6 +101,10 @@ void DrawScreen(void)
             }
             else if((i == tempPos.y) && (j == tempPos.x)){ //for placing down the player 
                 MacUILib_printf("%c", tempPos.symbol); 
+            }
+           else if ((i == foodPos.y) && (j == foodPos.x))
+            {
+                MacUILib_printf("%c", foodPos.symbol);
             }
             else {
                 MacUILib_printf(" ");
@@ -113,4 +130,8 @@ void CleanUp(void)
     MacUILib_clearScreen();    
   
     MacUILib_uninit();
+    //Remove heap instances 
+    delete myGM;
+    delete myPlayer;
+    delete myFood;
 }

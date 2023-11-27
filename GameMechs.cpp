@@ -72,7 +72,7 @@ void GameMechs::setInput(char this_input)
     input = this_input; 
 }
 
-void GameMechs::clearInput() //DOUBLE CHECK 
+void GameMechs::clearInput() 
 {
     input = -1; //a non ascii value 
 }
@@ -86,6 +86,13 @@ int GameMechs::getScore(){
 void GameMechs::incrementScore(int incVal){
     score += incVal; 
 }
+
+
+
+
+
+
+
 
 
 
