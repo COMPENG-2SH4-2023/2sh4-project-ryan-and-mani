@@ -76,6 +76,8 @@ void RunLogic(void)
     
     //Should clear input be here instead ???
 
+    //myGM->clearInput(); saw in the video idk if we need 
+
   
 }
 
