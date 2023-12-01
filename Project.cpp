@@ -30,8 +30,8 @@ void CleanUp(void);
 
 int main(void)
 {
-
     Initialize();
+
 
     while(myGM->getExitFlagStatus() == false)  
     {
@@ -40,8 +40,10 @@ int main(void)
         DrawScreen();
         LoopDelay();
     }
-
     CleanUp();
+
+    
+    
 
 }
 
@@ -156,7 +158,6 @@ void DrawScreen(void)
 
         MacUILib_printf("\nFood Pos: <%d %d>\n",foodPos.x, foodPos.y);
 
-        //exit condition 
 
 
 
@@ -170,8 +171,20 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
-  
+    MacUILib_clearScreen();  
+
+        if(myGM->getExitFlagStatus() == true && myGM->getLoseFlagStatus() == false)
+        {
+            MacUILib_printf("Game Ended!\n");
+            MacUILib_printf("Score: %d\n", myGM->getScore());  
+        }
+
+        if(myGM->getLoseFlagStatus()) 
+        {
+            MacUILib_printf("Game Over! You lose.\n");
+            MacUILib_printf("Score: %d\n", myGM->getScore());
+        }
+
     MacUILib_uninit();
     //Remove heap instances 
     delete myGM;
