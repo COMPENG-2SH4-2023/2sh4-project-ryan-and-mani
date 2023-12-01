@@ -9,23 +9,39 @@ Food::Food(GameMechs* mainGameMechsRef_){  //Default constructor
 }
 
 
-void Food::generateFood(objPos blockOff){
+void Food::generateFood(objPosArrayList* arrayListRef){
 
     int Rx;
     int Ry; 
-
+    int flag = 0;
 
     srand(time(NULL));
 
- 
-    
-    do {
+    while(flag == 0)
+    {
         Rx = (rand() % (mainGameMechsRef->getBoardSizeX() - 2)) + 1;
         Ry = (rand() % (mainGameMechsRef->getBoardSizeY() - 2)) + 1;
-    } while (Rx == blockOff.x && Ry == blockOff.y);
 
-    foodPos.x = Rx;
-    foodPos.y = Ry;
+        for(int i = 0; i < arrayListRef->getSize(); i++)
+        {
+            flag = 1;
+            objPos currentPos;
+            arrayListRef->getElement(currentPos,i);
+
+            if(currentPos.x == Rx && currentPos.y == Ry)
+            {
+                flag = 0;
+                break;
+            }
+        }
+
+         if(flag == 1)
+            {
+                  foodPos.x = Rx;
+                  foodPos.y = Ry;
+                  break;
+            }
+    }
 }
 
 
