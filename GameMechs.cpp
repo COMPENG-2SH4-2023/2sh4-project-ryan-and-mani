@@ -9,6 +9,7 @@ GameMechs::GameMechs()
     exitFlag = false;
     boardSizeX = 30; //default board size x 
     boardSizeY = 15; //default board size y 
+    
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
