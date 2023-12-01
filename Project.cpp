@@ -86,6 +86,8 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen(); 
 
+
+
     bool drawn;
 
     // objPos tempPos;  
@@ -155,11 +157,7 @@ void DrawScreen(void)
         MacUILib_printf("\nFood Pos: <%d %d>\n",foodPos.x, foodPos.y);
 
         //exit condition 
-        if(myGM->getLoseFlagStatus())
-        {
-            MacUILib_printf("Game Over! You lose.\n");
-            MacUILib_printf("Score: %d\n", myGM->getScore());
-        }
+
 
 
 }
