@@ -9,6 +9,7 @@ GameMechs::GameMechs()
     exitFlag = false;
     boardSizeX = 30; //default board size x 
     boardSizeY = 15; //default board size y 
+    score = 0;
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -17,6 +18,7 @@ GameMechs::GameMechs(int boardX, int boardY)
     exitFlag = false;
     boardSizeX = boardX;
     boardSizeY = boardY;
+    score = 0;
 }
 
 
@@ -31,9 +33,11 @@ bool GameMechs::getExitFlagStatus()
 
 }
 
-//bool GameMechs::getLoseFlagStatus(){
-    //return loseflag; 
-//}
+bool GameMechs::getLoseFlagStatus()
+{
+    return loseflag; 
+}
+
 void GameMechs::setLoseFlag(){
      loseflag = 1; 
 }
@@ -77,8 +81,6 @@ void GameMechs::clearInput()
     input = -1; //a non ascii value 
 }
 
-
-
 int GameMechs::getScore(){
     return score;
 }
@@ -86,15 +88,6 @@ int GameMechs::getScore(){
 void GameMechs::incrementScore(int incVal){
     score += incVal; 
 }
-
-
-
-
-
-
-
-
-
 
  GameMechs::~GameMechs(){ //DESTRUCTOR 
     //delete myGM; 

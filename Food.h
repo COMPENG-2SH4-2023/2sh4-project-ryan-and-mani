@@ -16,12 +16,16 @@ class Food{
     private: 
         objPos foodPos; 
         GameMechs* mainGameMechsRef;  // Reference to GameMechs for accessing board size
+        objPosArrayList* arrayListRef;
+
 
 
 
     public:
         Food(GameMechs* mainGameMechsRef); 
-        void generateFood(objPos blockOff); //input playerPos 
+        void generateFood(objPosArrayList* arrayListRef); //input playerPos -> you need to upgrade this somehow  
+        //need to accept the play body arraylist 
+        //go through each arraylist element ot make sure they are all blocked off from random food generation 
         void getFoodPos(objPos &returnPos);
 
 
