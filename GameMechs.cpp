@@ -91,6 +91,5 @@ void GameMechs::incrementScore(int incVal){
     score += incVal; 
 }
 
- GameMechs::~GameMechs(){ //DESTRUCTOR 
-    //delete myGM; 
-        }
+ //GameMechs::~GameMechs(){ //DESTRUCTOR 
+//        }

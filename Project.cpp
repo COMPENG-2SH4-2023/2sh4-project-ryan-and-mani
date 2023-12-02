@@ -11,8 +11,7 @@ using namespace std;
 
 #define DELAY_CONST 100000
 
-//objPos myPos;
-
+//Pointer Instances for 3 classes:
 GameMechs* myGM;
 Player* myPlayer; 
 Food* myFood; 
@@ -53,19 +52,14 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    //myPos.setObjPos(2,3,'@')
 
-
-    myGM = new GameMechs(26,13);
-
-    myFood = new Food(myGM);
+    //Memory Allocation for 3 instances
+    myGM = new GameMechs(26,13); //Board Size 
+    myFood = new Food(myGM);   
     myPlayer = new Player(myGM, myFood);
 
-    myFood->generateFood(myPlayer->getPlayerPos());
+    myFood->generateFood(myPlayer->getPlayerPos()); //Generate the first food on the board 
 
-    //objPos myPlayerO{-1,-1,'o'};
-    //myPlayer->getPlayerPos(myPlayerO);
-    //myFood->generateFood(myPlayerO); //we have to change to array list operation 
 
 }
 
@@ -76,10 +70,9 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    myPlayer->updatePlayerDir();
+    myPlayer->updatePlayerDir(); 
     myPlayer->movePlayer();
     
-    //Should clear input be here instead ???
 
     //myGM->clearInput(); saw in the video idk if we need 
 }
@@ -173,19 +166,21 @@ void CleanUp(void)
 {
     MacUILib_clearScreen();  
 
-        if(myGM->getExitFlagStatus() == true && myGM->getLoseFlagStatus() == false)
+        if(myGM->getExitFlagStatus() == true && myGM->getLoseFlagStatus() == false) //End Message if player uses exit button (space)
         {
             MacUILib_printf("Game Ended!\n");
             MacUILib_printf("Score: %d\n", myGM->getScore());  
         }
 
-        if(myGM->getLoseFlagStatus()) 
+        if(myGM->getLoseFlagStatus()) //End message if self collision happens 
         {
             MacUILib_printf("Game Over! You lose.\n");
             MacUILib_printf("Score: %d\n", myGM->getScore());
         }
 
     MacUILib_uninit();
+
+    
     //Remove heap instances 
     delete myGM;
     delete myPlayer;

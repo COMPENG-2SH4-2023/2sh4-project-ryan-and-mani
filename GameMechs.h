@@ -12,43 +12,37 @@ using namespace std;
 
 class GameMechs
 {
-    // Construct the remaining declaration from the project manual.
-
-    // Only some sample members are included here
-
-    // You will include more data members and member functions to complete your design.
 
     private:
-        char input;
-        bool exitFlag;
-        int score; 
-        bool loseflag; 
+        char input; //Key input 
+        bool exitFlag; //Exit flag to end program loop 
+        int score; //Score for tracking how many foods have been consumed 
+        bool loseflag; //Lose flag to show when the player has lost 
 
-        int boardSizeX;
+        int boardSizeX; 
         int boardSizeY;
 
     public:
-        GameMechs();
-        GameMechs(int boardX, int boardY);
+        GameMechs();//Default constructor 
+        GameMechs(int boardX, int boardY);//Constructor 1 
         
-        bool getExitFlagStatus();
-        bool getLoseFlagStatus();
-        void setExitTrue();
-        bool setLoseFlagStatus();
-        void setLoseFlag();
+        bool getExitFlagStatus(); //Returns exit flag status: true or false 
+        bool getLoseFlagStatus(); //Returns lose flag status: true or false 
+        void setExitTrue(); //Sets exit flag to true (1)
+        void setLoseFlag(); //Set lose flag to true (1)
 
-        char getInput();
-        void setInput(char this_input);
+        char getInput(); //Get player key input if theres an input 
+        void setInput(char this_input); 
         void clearInput();
 
-        int getBoardSizeX();
-        int getBoardSizeY();
+        int getBoardSizeX();//Return board x size 
+        int getBoardSizeY();//Return board y size 
 
-        int getScore();
-        void incrementScore(int incVal);
+        int getScore(); //Return score
+        void incrementScore(int incVal);//Add inVal to the score 
 
  
-        ~GameMechs();
+    //    ~GameMechs(); Destructor Not Needed 
 
 
 };
