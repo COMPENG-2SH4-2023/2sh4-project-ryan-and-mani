@@ -14,20 +14,19 @@ using namespace std;
 class Food{
 
     private: 
-        objPos foodPos; //Refrence to objPos to generate food around the board
+        objPos foodPos; 
         GameMechs* mainGameMechsRef;  // Reference to GameMechs for accessing board size
         objPosArrayList* arrayListRef; //Refrence to objPosArrayList for accessing player body positions
 
-
-
-
     public:
-        Food(GameMechs* mainGameMechsRef); //Constructor
-        void generateFood(objPosArrayList* arrayListRef); //Generates a random food item, takes the arrayListRef so that food is not generated on the player body
-        void getFoodPos(objPos &returnPos); //Returns the food position
+        Food(GameMechs* mainGameMechsRef); 
+        void generateFood(objPosArrayList* arrayListRef); //input playerPos -> you need to upgrade this somehow  
+        //need to accept the play body arraylist 
+        //go through each arraylist element ot make sure they are all blocked off from random food generation 
+        void getFoodPos(objPos &returnPos);
 
 
-        //~Food(); Destructor Not Needed 
+        ~Food();
 
 
 

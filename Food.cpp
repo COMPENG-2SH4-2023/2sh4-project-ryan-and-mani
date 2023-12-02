@@ -45,7 +45,6 @@ void Food::generateFood(objPosArrayList* arrayListRef){
     }
 }
 
-
 void Food::getFoodPos(objPos &returnPos){ //Returns position of food
 
    returnPos = foodPos; 
@@ -54,6 +53,6 @@ void Food::getFoodPos(objPos &returnPos){ //Returns position of food
 
 
 
-//Food::~Food(){ Destructor Not Needed 
+Food::~Food(){
 
-//}
+}

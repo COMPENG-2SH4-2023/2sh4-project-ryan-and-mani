@@ -24,9 +24,6 @@ void LoopDelay(void);
 void CleanUp(void);
 
 
-
-
-
 int main(void)
 {
     Initialize();
@@ -40,10 +37,6 @@ int main(void)
         LoopDelay();
     }
     CleanUp();
-
-    
-    
-
 }
 
 

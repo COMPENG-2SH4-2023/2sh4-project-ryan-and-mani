@@ -1,73 +1,74 @@
 #include "objPosArrayList.h"
 
-// Check lecture contents on general purpose array list construction, 
-// and modify it to support objPos array list construction.
-
-objPosArrayList::objPosArrayList()
-{
-    arrayCapacity = ARRAY_MAX_CAP;
-    listSize = 0;
-    aList = new objPos[arrayCapacity]; //200 elements on the heao 
+// Constructor for objPosArrayList
+objPosArrayList::objPosArrayList() {
+    arrayCapacity = ARRAY_MAX_CAP;  // Set the capacity of the array to a predefined maximum
+    listSize = 0;                   // Initialize the current size of the list to 0
+    aList = new objPos[arrayCapacity]; // Dynamically allocate memory for 'arrayCapacity' number of objPos objects
 }
 
-objPosArrayList::~objPosArrayList()
-{
-    delete[] aList; //[] deletes every element in the array -> without it only does the first element 
+// Destructor for objPosArrayList
+objPosArrayList::~objPosArrayList() {
+    delete[] aList;  // Delete the dynamically allocated array to prevent memory leaks
 }
 
-int objPosArrayList::getSize()
-{
-    return listSize;
+// Method to get the current size of the list
+int objPosArrayList::getSize() {
+    return listSize;  // Return the current number of meaningful elements in the list
 }
 
-void objPosArrayList::insertHead(objPos thisPos)
-{
-    //check if list size is equal to capacity 
-    if(listSize == arrayCapacity)
-    {
-        return;
+// Method to insert an element at the head (beginning) of the list
+void objPosArrayList::insertHead(objPos thisPos) {
+    // Check if the list has reached its capacity
+    if (listSize == arrayCapacity) {
+        return;  // Do not insert if the list is full
     }
 
-    //shuffle elements one index to the right to free space at index zero to be filled with new element 
-    //listSize size is the amount of content in the list which is one larger than the amount of elements 
-    for(int i = listSize; i > 0; i--)
-    {
-        aList[i].setObjPos(aList[i-1]); // this will shuffle all the elements towards the tail
+    // Shift all existing elements one position to the right to make room at the head
+    for (int i = listSize; i > 0; i--) {
+        aList[i].setObjPos(aList[i - 1]);
     }
-    aList[0].setObjPos(thisPos); //insert thisPos to the first element which holds an x,y,symbol
-    listSize++;
+
+    // Insert the new element at the head of the list
+    aList[0].setObjPos(thisPos);
+    listSize++;  // Increment the size of the list
 }
 
-void objPosArrayList::insertTail(objPos thisPos)
-{
+// Method to insert an element at the tail (end) of the list
+void objPosArrayList::insertTail(objPos thisPos) {
+    // Insert the new element at the next available position at the end of the list
     aList[listSize++].setObjPos(thisPos);
 }
 
-void objPosArrayList::removeHead()
-{
-    for(int i = 0; i < listSize -1; i++)
-    {
-        aList[i].setObjPos(aList[i+1]);
-    } 
-    listSize--;
+// Method to remove an element from the head of the list
+void objPosArrayList::removeHead() {
+    // Shift all elements one position to the left, effectively removing the head
+    for (int i = 0; i < listSize - 1; i++) {
+        aList[i].setObjPos(aList[i + 1]);
+    }
+    listSize--;  // Decrement the size of the list
 }
 
-void objPosArrayList::removeTail()
-{
-    listSize--;
+// Method to remove an element from the tail of the list
+void objPosArrayList::removeTail() {
+    listSize--;  // Simply decrement the size of the list, effectively removing the tail element
 }
 
-void objPosArrayList::getHeadElement(objPos &returnPos)
-{
-    returnPos.setObjPos(aList[0]);
+// Method to get the element at the head of the list
+void objPosArrayList::getHeadElement(objPos &returnPos) {
+    returnPos.setObjPos(aList[0]);  // Return the first element of the list
 }
 
-void objPosArrayList::getTailElement(objPos &returnPos)
-{
-    returnPos.setObjPos(aList[listSize-1]);
+// Method to get the element at the tail of the list
+void objPosArrayList::getTailElement(objPos &returnPos) {
+    returnPos.setObjPos(aList[listSize - 1]);  // Return the last meaningful element of the list
 }
 
-void objPosArrayList::getElement(objPos &returnPos, int index)
-{
-    returnPos.setObjPos(aList[index]);
+// Method to get an element at a specific index
+void objPosArrayList::getElement(objPos &returnPos, int index) {
+    // Check if the index is within the bounds of the list
+    if (index >= 0 && index < listSize) {
+        returnPos.setObjPos(aList[index]);  // Set the returnPos to the element at the specified index
+    }
+    // You might want to handle the case where the index is out of bounds
 }

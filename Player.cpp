@@ -2,70 +2,71 @@
 #include "Food.h"
 
 
-
+//player Class Constructor 
 Player::Player(GameMechs* thisGMRef, Food* foodRef)
 {
-    mainGameMechsRef = thisGMRef;
-    this->foodRef = foodRef;
-    myDir = STOP;
+    mainGameMechsRef = thisGMRef; //set the reference to the GameMechs object 
+    this->foodRef = foodRef; //Set the reference to the Food object
+    myDir = STOP; //Initialize the player's direction to STOP (idle state)
 
-    // more actions to be included
-    objPos tempPos; //initial position 
-    tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,mainGameMechsRef->getBoardSizeY()/2,'@'); //initalze position -> may need to change to take into account board size 
+   
+    objPos tempPos; // Temporary variable to hold the initial position 
+
+    // Set the initial position to the center of the game board
+    // The symbol '@' represents the player
+    tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,mainGameMechsRef->getBoardSizeY()/2,'@'); 
      
-    playerPosList = new objPosArrayList(); //dynamically allocate memory for an objPosArrayList object (calls constructor) and save its adress to playerPosList
+    playerPosList = new objPosArrayList(); // Create a new list to store the player's positions
     playerPosList->insertHead(tempPos); //tempPos is inserted at the "Head"/beginning of the playerPostList
 }
 
 
+//Play Class Deconstructor
 Player::~Player()
 {
-    // delete any heap members here
-    //we can leave it empty for now since no new keyword 
-    delete playerPosList; //dont need square brackets since we didnt use new[]
+    delete playerPosList; 
 }
 
 objPosArrayList* Player::getPlayerPos()   
 {
-    return playerPosList; 
-    //instead of void, this will return a pointer to an objPosArrayList object 
-    //playerPosList is a pointer to an instance of objPosArrayList  
+    return playerPosList; //return a pointer to an objPosArrayList object 
 }
 
 void Player::updatePlayerDir()
 {
-    // PPA3 input processing logic  
-
-    //where do i get the input -- how do i check for input 
-    //not macui get char
-
+    //get the user input using the GameMechs
     char input = mainGameMechsRef->getInput();
     
-    //may need if input!=0 
+    //switch statement to handle input characters 
     switch(input)     
     {
-        case ' ':
-            mainGameMechsRef->setExitTrue();
+        case ' ': //exit the game if spacebar is pressed 
+            mainGameMechsRef->setExitTrue(); // Set the game exit flag to true to indicate the game should end.
             break;
         case 'w':
-            if(myDir != UP && myDir != DOWN) //if the direction in going isnt UP or Down then you are able to go UP
+            // Change the direction to UP unless the current direction is already DOWN.
+            // Prevents the snake from reversing on itself.
+            if(myDir != UP && myDir != DOWN) 
             {
                 myDir = UP;
             }
             break;
         case 'a':
+            // Change the direction to LEFT unless the current direction is already RIGHT.
             if(myDir != LEFT && myDir != RIGHT)
             {
                 myDir = LEFT;
             }
             break;
         case 's':
+            // Change the direction to DOWN unless the current direction is already UP.
             if(myDir != UP && myDir != DOWN)
             {
                 myDir = DOWN;
             }
             break;
         case 'd':
+            // Change the direction to RIGHT unless the current direction is already LEFT.
             if(myDir != LEFT && myDir != RIGHT)
             {
                 myDir = RIGHT;
@@ -76,21 +77,21 @@ void Player::updatePlayerDir()
             break;
     }     
 
+    // Clear the input in the GameMechs object to prepare for the next input.
     mainGameMechsRef->clearInput(); 
 }
 
 void Player::movePlayer()
 {
-    // PPA3 Finite State Machine logic
-    //board size you can get from the gamemech
-
     //holds the position information of the current head
     objPos currentHead; 
     playerPosList->getHeadElement(currentHead);
 
+    //holds the positions information of the generated food
     objPos foodPostion;
     foodRef->getFoodPos(foodPostion);
 
+    //increase or decrease head movement depenedent on myDir from updatePlayerDir
     switch (myDir)
         {
             case UP:  
@@ -109,9 +110,11 @@ void Player::movePlayer()
                 break;
         }
 
+    //initalize the board size
     int boardSizeX = mainGameMechsRef->getBoardSizeX();
     int boardSizeY = mainGameMechsRef->getBoardSizeY();
 
+    //initalize the width of the board, neglecting the boarder 
     int widthX = boardSizeX - 2;
     int widthY = boardSizeY - 2;
 
@@ -120,11 +123,13 @@ void Player::movePlayer()
     // Wrap around on the Y-axis using the modulus operator
     currentHead.y = (((currentHead.y - 1) + widthY) % widthY) + 1; //(1-13)
 
-    //insert the updated position at the head of the lisgt
+    //insert the updated position at the head of the list
     playerPosList->insertHead(currentHead);
 
+    //call the self collison 
     checkSelfCollision();
 
+    //If the head pos collides with the food increment the score by one and generate a new food position 
     if(currentHead.x == foodPostion.x && currentHead.y == foodPostion.y)
     {
         mainGameMechsRef->incrementScore(1);
@@ -142,18 +147,23 @@ bool Player::checkSelfCollision()
 {
     //if collided set lose flag and and exit flag to true (through GM)
     //this will break program loop and end the game
-    objPos currentHead;
-    objPos currentPos;
 
-    playerPosList->getHeadElement(currentHead); 
+    objPos currentHead; //holds the current head position 
+    objPos currentPos; //holds the current position being checked 
+
+    playerPosList->getHeadElement(currentHead); //get the current head position 
 
     for(int i = 2; i < playerPosList->getSize(); i++)
     {
-        playerPosList->getElement(currentPos,i);
-        if(currentHead.x == currentPos.x && currentHead.y == currentPos.y)
-        {
+        // Check if the head's position matches the current segment's position.
+        if(currentHead.x == currentPos.x && currentHead.y == currentPos.y) {
+            // If a match is found, it means the head has collided with the body.
+            // Set the lose flag in the game mechanics to indicate the player has lost.
             mainGameMechsRef->setLoseFlag();
+            // Also set the exit flag to true to indicate the game should end.
             mainGameMechsRef->setExitTrue();
+            // Break the loop as the collision has been detected and handled.
+            break;
         }
     }
 }
