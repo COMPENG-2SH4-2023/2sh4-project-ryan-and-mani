@@ -149,12 +149,14 @@ bool Player::checkSelfCollision()
     //this will break program loop and end the game
 
     objPos currentHead; //holds the current head position 
-    objPos currentPos; //holds the current position being checked 
 
     playerPosList->getHeadElement(currentHead); //get the current head position 
 
     for(int i = 2; i < playerPosList->getSize(); i++)
     {
+        objPos currentPos; //holds the current position being checked 
+        playerPosList->getElement(currentPos, i);  // Retrieve the position of the current segment.
+
         // Check if the head's position matches the current segment's position.
         if(currentHead.x == currentPos.x && currentHead.y == currentPos.y) {
             // If a match is found, it means the head has collided with the body.
