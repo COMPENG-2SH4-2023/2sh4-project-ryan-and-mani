@@ -14,12 +14,10 @@ using namespace std;
 class Food{
 
     private: 
+        //objPosArrayList* foodBucket;
         objPos foodPos; 
         GameMechs* mainGameMechsRef;  // Reference to GameMechs for accessing board size
         objPosArrayList* arrayListRef;
-
-
-
 
     public:
         Food(GameMechs* mainGameMechsRef); 
@@ -28,11 +26,7 @@ class Food{
         //go through each arraylist element ot make sure they are all blocked off from random food generation 
         void getFoodPos(objPos &returnPos);
 
-
         ~Food();
-
-
-
 };
 
 #endif

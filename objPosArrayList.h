@@ -13,18 +13,18 @@ class objPosArrayList
         int arrayCapacity; //capacity of the aList
 
     public:
-        objPosArrayList();
-        ~objPosArrayList();
+        objPosArrayList(); //constuctor 
+        ~objPosArrayList(); //deconstructor
 
-        int getSize();
-        void insertHead(objPos thisPos);
-        void insertTail(objPos thisPos);
-        void removeHead();
-        void removeTail();
+        int getSize(); //getList size
+        void insertHead(objPos thisPos); //insert head at beginning of list
+        void insertTail(objPos thisPos); //insert last element of list
+        void removeHead(); //remove head at beginning of list
+        void removeTail(); //remove tail at end of list
         
-        void getHeadElement(objPos &returnPos);
-        void getTailElement(objPos &returnPos);
-        void getElement(objPos &returnPos, int index);
+        void getHeadElement(objPos &returnPos); //get position of the head 
+        void getTailElement(objPos &returnPos); //get position of the tail
+        void getElement(objPos &returnPos, int index); //get snake body element at a given index
 };
 
 #endif

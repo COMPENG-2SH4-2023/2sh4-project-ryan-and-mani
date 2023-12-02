@@ -44,15 +44,12 @@ void Food::generateFood(objPosArrayList* arrayListRef){
     }
 }
 
-
 void Food::getFoodPos(objPos &returnPos){
 
    returnPos = foodPos; 
 }
 
-
-
-
-Food::~Food(){
-
+Food::~Food()
+{
+    //delete foodBucket;
 }
