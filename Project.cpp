@@ -111,7 +111,7 @@ void DrawScreen(void)
                 MacUILib_printf("#");
             }
 
-           else if ((i == foodPos.y) && (j == foodPos.x)) //for placing donwn the food 
+           else if ((i == foodPos.y) && (j == foodPos.x)) //for placing down the food item
             {
                 MacUILib_printf("%c", foodPos.symbol);
             }
