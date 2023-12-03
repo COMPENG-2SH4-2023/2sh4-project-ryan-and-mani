@@ -91,7 +91,7 @@ void DrawScreen(void)
 
             drawn = false;
             
-            for(int k = 0; k < playerBody->getSize(); k++) //iterate through every element in the list 
+            for(int k = 0; k < playerBody->getSize(); k++) //iterate through every element in the list and draw the body pieces in the right positions
             {
                 playerBody->getElement(tempBody,k);
                 if(tempBody.x == j && tempBody.y == i)
@@ -111,11 +111,11 @@ void DrawScreen(void)
                 MacUILib_printf("#");
             }
 
-           else if ((i == foodPos.y) && (j == foodPos.x))
+           else if ((i == foodPos.y) && (j == foodPos.x)) //for placing donwn the food 
             {
                 MacUILib_printf("%c", foodPos.symbol);
             }
-            else {
+            else { //put spaces everywhere else 
                 MacUILib_printf(" ");
             }
         }
