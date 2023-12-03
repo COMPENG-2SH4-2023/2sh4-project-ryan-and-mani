@@ -58,7 +58,7 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   //preformed in the the player class updatePlayerDir 
+   //User input collection is preformed in the the player class updatePlayerDir 
 }
 
 void RunLogic(void)
@@ -66,8 +66,6 @@ void RunLogic(void)
     myPlayer->updatePlayerDir(); 
     myPlayer->movePlayer();
     
-
-    //myGM->clearInput(); saw in the video idk if we need 
 }
 
 void DrawScreen(void)
@@ -78,8 +76,6 @@ void DrawScreen(void)
 
     bool drawn;
 
-    // objPos tempPos;  
-    // myPlayer->getPlayerPos(tempPos);
 
     objPosArrayList* playerBody = myPlayer->getPlayerPos(); //playerBody is the entire playerPosArrayList
     objPos tempBody;
@@ -94,10 +90,6 @@ void DrawScreen(void)
         for (j = 0; j <= myGM->getBoardSizeX()-1; j++){
 
             drawn = false;
-
-            // else if((i == tempPos.y) && (j == tempPos.x)){ //for placing down the player 
-            //     MacUILib_printf("%c", tempPos.symbol); 
-            // }
             
             for(int k = 0; k < playerBody->getSize(); k++) //iterate through every element in the list 
             {
@@ -115,7 +107,6 @@ void DrawScreen(void)
                 continue; //if player body was drawn dont draw, dont draw anything below 
             }
 
-            //Frame -> needs to be below? 
             if (i == 0 || i == myGM->getBoardSizeY()-1 || j == 0 || j == myGM->getBoardSizeX()-1){ //for placing down the border
                 MacUILib_printf("#");
             }
@@ -132,10 +123,10 @@ void DrawScreen(void)
  
         } 
 
-        //all print functions
-        MacUILib_printf("Score %d\n", myGM->getScore());
+        //all print functions 
+        MacUILib_printf("Score %d\n", myGM->getScore()); //score
 
-        MacUILib_printf("Player Positions:\n");
+        MacUILib_printf("Player Positions:\n"); 
 
         playerBody->getElement(tempBody,0);
         MacUILib_printf("<%d %d> ",tempBody.x,tempBody.y);
